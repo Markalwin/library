@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Library Book Issue Register</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f0f0f0;
+      margin: 0;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    h1, h2 {
+      text-align: center;
+    }
+
+    .form-section {
+      margin-bottom: 30px;
+    }
+
+    label {
+      display: block;
+      margin: 10px 0 5px;
+    }
+
+    input[type="text"], input[type="date"] {
+      width: 100%;
+      padding: 8px;
+      margin-bottom: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    button {
+      display: block;
+      width: 100%;
+      padding: 10px;
+      background-color: #28a745;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #218838;
+    }
+
+    .table-section {
+      margin-top: 30px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+
+    table, th, td {
+      border: 1px solid #ddd;
+    }
+
+    th, td {
+      padding: 12px;
+      text-align: center;
+    }
+
+    th {
+      background-color: #f8f9fa;
+    }
+
+    td button {
+      padding: 5px 10px;
+      background-color: #dc3545;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    td button:hover {
+      background-color: #c82333;
+    }
+  </style>
+</head>
+<body>
+    <a href="user.html">User login</a>
+  <div class="container">
+    <h1>Library Book Issue Register</h1>
+
+    <!-- Issue Book Form -->
+    <div class="form-section">
+      <h2>Issue Book</h2>
+      <form id="issueBookForm">
+        <label for="bookTitle">Book Title:</label>
+        <input type="text" id="bookTitle" placeholder="Enter book title" required>
+
+        <label for="bookAuthor">Book Author:</label>
+        <input type="text" id="bookAuthor" placeholder="Enter book author" required>
+
+        <label for="issuedTo">Issued To:</label>
+        <input type="text" id="issuedTo" placeholder="Enter recipient's name" required>
+
+        <label for="issueDate">Issue Date:</label>
+        <input type="date" id="issueDate" required>
+
+        <button type="submit">Issue Book</button>
+      </form>
+    </div>
+
+    <!-- Issued Books Table -->
+    <div class="table-section">
+      <h2>Issued Books</h2>
+      <table id="issueTable">
+        <thead>
+          <tr>
+            <th>Book Title</th>
+            <th>Author</th>
+            <th>Issued To</th>
+            <th>Issue Date</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById('issueBookForm').addEventListener('submit', function (e) {
+      e.preventDefault();
+      
+      // Get form data
+      const bookTitle = document.getElementById('bookTitle').value;
+      const bookAuthor = document.getElementById('bookAuthor').value;
+      const issuedTo = document.getElementById('issuedTo').value;
+      const issueDate = document.getElementById('issueDate').value;
+
+      // Add book to the issue table
+      const issueTable = document.querySelector('#issueTable tbody');
+      const newRow = document.createElement('tr');
+
+      newRow.innerHTML = `
+        <td>${bookTitle}</td>
+        <td>${bookAuthor}</td>
+        <td>${issuedTo}</td>
+        <td>${issueDate}</td>
+        <td><button class="remove-btn">Remove</button></td>
+      `;
+
+      issueTable.appendChild(newRow);
+
+      // Clear the form
+      document.getElementById('bookTitle').value = '';
+      document.getElementById('bookAuthor').value = '';
+      document.getElementById('issuedTo').value = '';
+      document.getElementById('issueDate').value = '';
+
+      // Add remove functionality
+      newRow.querySelector('.remove-btn').addEventListener('click', function () {
+        issueTable.removeChild(newRow);
+      });
+    });
+  </script>
+</body>
+</html>

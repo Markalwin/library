@@ -1,0 +1,38 @@
+CREATE DATABASE book_database;
+
+USE book_database;
+
+CREATE TABLE books (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  bookNumber VARCHAR(255) NOT NULL,
+  title VARCHAR(255) NOT NULL,
+  author VARCHAR(255) NOT NULL,
+  copies INT NOT NULL,
+  tags VARCHAR(255),
+  customTags VARCHAR(255)
+);
+
+USE contact_db;
+
+CREATE TABLE contacts (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    phone VARCHAR(20) NOT NULL,
+    email VARCHAR(255) NOT NULL,
+    subject VARCHAR(255),
+    message TEXT NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+
+CREATE TABLE books (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    title VARCHAR(255) NOT NULL,
+    author VARCHAR(255) NOT NULL,
+    year INT NOT NULL
+);
+INSERT INTO books (title, author, year) 
+VALUES 
+('To Kill a Mockingbird', 'Harper Lee', 1960),
+('1984', 'George Orwell', 1949),
+('The Great Gatsby', 'F. Scott Fitzgerald', 1925);

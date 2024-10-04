@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Book Addition</title>
+  <style>
+    @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&family=Public+Sans:wght@300;400;500;600&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  text-decoration: none;
+  list-style: none;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+  color: #1d1c1c;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+header {
+  position: fixed;
+  width: 100%;
+  height: 15vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.625rem;
+  padding: 0.625rem 1.5625rem;
+  background: #eee8e8;
+  box-shadow: 0 2px 10px rgba(82, 80, 80, 0.384);
+}
+
+.time {
+  margin-top: 16vh;
+  height: 20%;
+  z-index: 2;
+  margin-left: 70%;
+}
+
+header a.logo {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  gap: 0.625rem;
+  padding: 1.125rem;
+  border-radius: 3.125rem 0 3.125rem 0;
+  margin-top: 2%;
+}
+
+header a.logo i {
+  font-size: 2.1875rem;
+  color: rgb(219, 101, 16);
+}
+
+header a.logo span {
+  font-size: 0.9375rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+a {
+  text-decoration: none;
+  color: black;
+}
+
+a:hover {
+  cursor: pointer;
+  color: rgb(219, 101, 16);
+}
+
+a:active {
+  background: rgba(139, 133, 172, 0.5);
+}
+
+ul {
+  list-style-type: none;
+}
+
+li {
+  font-size: 1.25rem;
+}
+
+input {
+  width: 50%;
+  border: 2px solid black;
+  background-color: white;
+  padding: 5px;
+  font-size: 1.25rem;
+  display: block;
+  margin-bottom: 1.25rem;
+  border-radius: 3px;
+}
+
+p {
+  font-size: 1.25rem;
+}
+
+.inputs {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 80vw;
+}
+
+.addBtn {
+  align-self: flex-end;
+  padding: 5px 10px;
+  font-size: 0.9375rem;
+  box-shadow: 3px 3px 2px black;
+  margin-right: 25%;
+}
+
+.remove {
+  padding: 5px;
+  font-size: 0.9375rem;
+  box-shadow: 3px 3px 2px black;
+}
+
+.section {
+  height: 80vh;
+  width: 90vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.book-details {
+  height: 3.75rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  /* margin-top: 5px; */
+  margin: 0.3125rem 1.25rem;
+  padding: 0 0.9375rem;
+}
+
+.book-details:nth-child(odd) {
+  background-color: #cebfbf;
+  border-radius: 5px;
+}
+
+.bookDisplay {
+  margin-top: 6.25rem;
+  border-radius: 2px;
+  width: 80%;
+  max-height: 60vh;
+  overflow: hidden;
+  overflow-y: scroll;
+}
+
+#contact-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1.25rem;
+  margin-top: 1.25rem;
+}
+
+#addBook {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1.25rem;
+  margin-top: 1.25rem;
+}
+
+nav {
+  display: flex;
+  padding: 0 10px;
+  height: 2.5rem;
+  justify-content: space-between;
+  align-items: center;
+  width: 90vw;
+}
+
+.nav-ul {
+  display: flex;
+  margin-top: 2%;
+  padding: 0 0.625rem;
+}
+
+.nav-ul li {
+  padding: 0.125rem 0.9375rem;
+}
+
+footer {
+  position: fixed;
+  width: 100%;
+  height: 40px;
+  display: flex;
+  padding-left: 1.875rem;
+  align-items: center;
+  background: #dad5d5;
+  box-shadow: 0 0.125rem 0.625rem rgba(82, 80, 80, 0.384);
+  bottom: 0;
+}
+
+.contact-ul {
+  list-style-type: circle;
+}
+    /* CSS styles for the form */
+    body {
+      font-family: Arial, sans-serif;
+    }
+    .form-container {
+      width: 400px;
+      margin: 0 auto;
+      padding: 20px;
+      border: 1px solid #ccc;
+    }
+    label {
+      display: block;
+      margin-bottom: 5px;
+    }
+    input[type="text"],
+    input[type="number"] {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 10px;
+      border: 1px solid #ccc;
+    }
+    select {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 10px;
+      border: 1px solid #ccc;
+    }
+    input[type="checkbox"] {
+      margin-right: 5px;
+    }
+    button {
+      padding: 10px 20px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+    <a href="index.html">Our Books</a>
+  <div class="form-container">
+    <h2>Book Addition Mode</h2>
+    <form id="bookForm">
+      <label for="bookNumber">Book Number:</label>
+      <input type="text" id="bookNumber" name="bookNumber" required>
+
+      <label for="title">Title:</label>
+      <input type="text" id="title" name="title" required>
+
+      <label for="author">Author:</label>
+      <input type="text" id="author" name="author" required>
+
+      <label for="tags">Tags:</label>
+      <input type="checkbox" id="historicalFiction" name="tags" value="Historical Fiction">
+      <label for="historicalFiction">Historical Fiction</label>
+      <br>
+      <label for="customTags">Custom Tags:</label>
+      <input type="text" id="customTags" name="customTags">
+
+      <label for="copies">No. of Copies:</label>
+      <input type="number" id="copies" name="copies" value="1" min="1" required>
+
+      <button type="submit">Create</button>
+    </form>
+
+    <div id="output"></div>
+  </div>
+
+  const bookContainer = document.querySelector('.bookDisplay');
+
+  function displayBook(book) {
+    bookContainer.insertAdjacentHTML(
+      'beforeend',
+      `<div class="book-details" id="book-${book.id}">
+          <p>"${book.title}" by ${book.author}</p> 
+          <button class="remove" type="button" id="remove-${book.id}">Remove</button>
+        </div>`,
+    );
+  }
+  
+  class BookCollection {
+    constructor(bookArray) {
+      this.bookArray = bookArray;
+    }
+  
+    removeBook(book) {
+      this.bookArray.splice(book, 1);
+      localStorage.setItem('bookCollectionArray', JSON.stringify(this.bookArray));
+      bookContainer.innerHTML = '';
+      this.bookArray.forEach((book, i) => {
+        book.id = i;
+        displayBook(book);
+        if (document.querySelector(#remove-${book.id})) {
+          document
+            .querySelector(#remove-${book.id})
+            .addEventListener('click', this.removeBook.bind(this, book));
+        }
+      });
+  
+      if (this.bookArray[0]) bookContainer.style.border = 'solid 2.5px #635e5e';
+      else bookContainer.style.border = 'none';
+    }
+  
+    addBook(title, author) {
+      this.bookArray.push({
+        title,
+        author,
+        id: this.bookArray.length,
+      });
+      localStorage.setItem('bookCollectionArray', JSON.stringify(this.bookArray));
+  
+      displayBook(this.bookArray[this.bookArray.length - 1]);
+      if (
+        document.querySelector(
+          #remove-${this.bookArray[this.bookArray.length - 1].id},
+        )
+      ) {
+        document
+          .querySelector(
+            #remove-${this.bookArray[this.bookArray.length - 1].id},
+          )
+          .addEventListener('click', () => {
+            this.removeBook(this.bookArray[this.bookArray.length - 1]);
+          });
+      }
+      if (this.bookArray[0]) bookContainer.style.border = 'solid 3px #000000';
+      else bookContainer.style.border = 'none';
+    }
+  }
+  
+  const bookCollection = localStorage.getItem('bookCollectionArray')
+    ? new BookCollection(JSON.parse(localStorage.getItem('bookCollectionArray')))
+    : new BookCollection([]);
+  bookCollection.bookArray.forEach((book) => {
+    displayBook(book);
+    if (document.querySelector(#remove-${book.id})) {
+      document
+        .querySelector(#remove-${book.id})
+        .addEventListener(
+          'click',
+          bookCollection.removeBook.bind(bookCollection, book),
+        );
+    }
+  });
+  if (bookCollection.bookArray[0]) {
+    bookContainer.style.border = 'solid 3px #000000';
+  } else bookContainer.style.border = 'none';
+  
+  const addButton = document.querySelector('.addBtn');
+  const titleInput = document.querySelector('#titleInput');
+  const authorInput = document.querySelector('#authorInput');
+  addButton.addEventListener('click', () => {
+    if (titleInput.value && authorInput.value) {
+      bookCollection.addBook(titleInput.value, authorInput.value);
+      titleInput.value = '';
+      authorInput.value = '';
+    }
+  });
+  
+  document.querySelectorAll('.section').forEach((section) => {
+    if (!(section.id === 'bookList')) section.style.display = 'none';
+  });
+  
+  const navBar = document.querySelector('.navBar');
+  navBar.addEventListener('click', (e) => {
+    e.preventDefault();
+    if (e.target.classList.contains('navLink')) {
+      const anchorHref = e.target.href.split('#')[1];
+      document.querySelectorAll('.section').forEach((section) => {
+        if (section.id === anchorHref) section.style.display = 'flex';
+        else section.style.display = 'none';
+      });
+    }
+  });
+</body>
+</html>

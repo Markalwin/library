@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Final module test</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet">
+</head>
+<style>
+    body{
+    /* background-color: rgb(147, 130, 169); */
+    background: linear-gradient(lightgrey,lightpink);
+    color: white;
+    margin: 0;
+    font-family: 'Inter', sans-serif;
+}
+nav {
+    display: flex;
+    justify-content: center;
+    background-color: transparent;
+    padding: 10px;
+}
+
+nav a {
+    color: black;
+    text-decoration: none;
+    margin: 0 15px;
+    font-size: 16px;
+    font-weight: 500;
+}
+.main{
+    display: flex;
+    justify-content: space-between;
+}
+nav a:hover {
+    color: white;
+}
+*{
+    box-sizing: border-box;
+}
+a:hover{
+    cursor: pointer;
+}
+
+.container{
+    margin: 20px 50px;
+}
+
+.input-container{
+
+    display: grid;
+    grid-template-columns: repeat(3,auto);
+    gap:30px;
+    padding: 0;
+
+}
+
+.degree{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    gap: 10px;
+}
+
+.input-container input{
+    background-color: white;
+    border: 1px solid white;
+    height: 40px;
+    padding-left: 10px;
+    width: auto;
+    color: black;
+    border-radius: 10px;
+}
+
+
+.icons{
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+    gap:10px
+}
+.table{
+    border: 1px solid white;
+    width:100%;
+    border-spacing: 0;
+    min-height: 200px;
+    overflow-x: auto;
+}
+
+th,td{
+    text-align: center;
+}
+th{
+    border-bottom: 1px solid white;
+    border-right: 1px solid white;
+    padding: 10px;
+}
+td{
+    padding: 10px;
+    border-right: 1px solid white;
+}
+tbody{
+    height: auto;
+}
+
+.search{
+    width:100%;
+    background-color: white;
+    border: 1px solid white;
+    height: 40px;
+    padding: 0;
+    margin-bottom: 30px;
+    margin-top: 20px;
+    width:100%;
+    padding-left: 10px;
+    color: black;
+    border-radius: 20px;
+}
+
+
+.button {
+    height: 40px;
+    width: 400px;
+    margin: 20px;
+    margin-left: 0;
+    margin-top: 30px;
+    border-radius: 10px;
+    background-color: lightgrey;
+    cursor: pointer;
+    
+}
+</style>
+<body>
+    <a href="issuebook.html">Issue books</a>
+    <a href="return.html">Return books</a>
+    <main class="main">
+        <head>
+            <h1></h1>
+        </head>
+    <div id="header">
+        <nav>
+            <a href="home.html">Home</a>
+            <a href="admin.html">Admin</a>
+            <a href="user.html">User login</a>
+            <a href="contact.html">Contact Us</a>
+        </nav>
+    </main>
+
+    <div class="container">
+        <h1>Student login</h1>
+        <div class="input-container">
+            <input type="text" placeholder="Name" id="name">
+            <input type="email" placeholder="Email" id="email">
+            <input type="text" placeholder="GPA" id="grade">
+            <input type="number" placeholder="Age" id="age">
+            <input type="text" placeholder="Degree" id="degree">
+        </div>
+
+        <button class="button" type="submit" id="submit" onclick="addStudent()">Add Student</button>
+
+        <input class="search" type="text" id="search" onkeyup="search()" placeholder="Search By Name, email or Degree">
+
+        <table class="table" id="table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Student Name</th>
+                    <th>Email</th>
+                    <th>Age</th>
+                    <th>GPA</th>
+                    <th>Degree</th>
+                </tr>
+            </thead>
+
+            <tbody id="tbody">
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+       var count = 0;
+var students = []; 
+var global_id;
+function addStudent(){
+
+    const nameValue = document.getElementById('name').value;
+    const emailValue = document.getElementById('email').value;
+    const ageValue = document.getElementById('age').value;
+    const gradeValue = document.getElementById('grade').value;
+    const degreeValue = document.getElementById('degree').value;
+
+    if(document.querySelector("#submit").innerText == "Edit Student"){
+        console.log("this will edit and not add");
+        console.log(global_id);
+        let index;
+
+        for (let i = 0; i < students.length; i++) {
+            if (students[i]['ID'] == global_id) {
+                index=i;
+                break;
+            }
+        }
+
+        let studentobj = students[index];
+
+        studentobj['name'] = nameValue;
+        studentobj['email'] = emailValue;
+        studentobj['grade'] = gradeValue;
+        studentobj['age'] = ageValue;
+        studentobj['degree'] = degreeValue;
+
+        students[index] = studentobj;
+
+        showTable();
+        document.querySelector("#submit").innerHTML = "Add Student";
+
+            document.getElementById('name').value="";
+            document.getElementById('email').value="";
+            document.getElementById('age').value="";
+            document.getElementById('grade').value="";
+            document.getElementById('degree').value="";
+
+     return;
+
+    }
+    if(nameValue=='' || emailValue=='' || ageValue=='' || gradeValue =='' || degreeValue==""){
+        alert("All fields are required!")
+        return;
+    }
+    count++;
+
+    students.push({
+        ID:count,
+        name:nameValue,
+        email:emailValue,
+        age:ageValue,
+        grade:gradeValue,
+        degree:degreeValue
+    });
+
+
+    document.getElementById('name').value="";
+    document.getElementById('email').value="";
+    document.getElementById('age').value="";
+    document.getElementById('grade').value="";
+    document.getElementById('degree').value="";
+    console.log(students);
+    showTable();
+}
+
+
+function showTable(){
+    const table = document.getElementById('tbody');
+    while (table.hasChildNodes()) {
+        table.removeChild(table.firstChild);
+    }
+
+    table.value="";
+    students.forEach((student)=>{
+
+        const row = document.createElement("tr");
+        var keys=Object.keys(student);
+
+        var id = document.createElement('td');
+        const name = document.createElement('td');
+        const email = document.createElement('td');
+        const age = document.createElement('td');
+        const grade = document.createElement('td');
+        const degree = document.createElement('td');
+
+        keys.forEach((key)=>{
+            if(key=='ID'){
+                id.innerHTML = student[key];
+            }
+            else if(key=='name'){
+                name.innerHTML = student[key];
+            }
+            else if(key=='email'){
+                email.innerHTML = student[key];
+            }
+            else if(key=='age'){
+                age.innerHTML = student[key];
+            }
+            else if(key=='grade'){  
+                grade.innerHTML = student[key];
+            }
+            else
+            degree.innerHTML = `<div class='degree'><div>${student[key]}</div> <div class="icons"><a onClick="edit(${student['ID']})" class='fa'>&#xf044;</a> <a onClick="del(${student['ID']})" class='fa'>&#xf1f8;</a> </div></div> `;
+
+            row.appendChild(id);
+            row.appendChild(name);
+            row.appendChild(email);
+            row.appendChild(age);
+            row.appendChild(grade);
+            row.appendChild(degree);       
+        })
+
+        table.appendChild(row);
+    })
+}
+
+function search(){
+  var input, filter, table, tr, td, i, txtValue,txtValue1,txtValue2;
+  input = document.getElementById("search");
+  filter = input.value.toUpperCase();
+  table = document.getElementById("tbody");
+  tr = table.getElementsByTagName("tr");
+
+
+  for (i = 0; i < tr.length; i++) {
+    td = tr[i].getElementsByTagName("td")[1];
+    td1 = tr[i].getElementsByTagName("td")[2];
+    td2 = tr[i].getElementsByTagName("td")[5];
+    if (td || td1 || td2) {
+      txtValue = td.textContent || td.innerText;
+      txtValue1 = td1.textContent || td1.innerText;
+      txtValue2 = td2.textContent || td2.innerText;
+      if (txtValue.toUpperCase().indexOf(filter) > -1 || txtValue1.toUpperCase().indexOf(filter) > -1 || txtValue2.toUpperCase().indexOf(filter) > -1) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    }
+  }
+}
+
+
+function edit(id) {
+    let student;
+    console.log(id);
+    for (let i = 0; i < students.length; i++) {
+        if (students[i]['ID'] == id) {
+            student = students[i];
+            break;
+        }
+    }
+
+    document.querySelector("#name").value = student['name'];
+    document.querySelector("#email").value = student['email'];
+    document.querySelector("#grade").value = student['grade'];
+    document.querySelector("#age").value = student['age'];
+    document.querySelector("#degree").value = student['degree'];
+
+    document.getElementById("submit").innerText = "Edit Student";
+
+    global_id=id;
+}
+
+function del(id){
+    students.forEach((student,index) => {
+        if(student['ID']==id){
+            students.splice(index,1);
+            showTable();
+        }
+    })
+} 
+    </script>
+</body>
+</html>
